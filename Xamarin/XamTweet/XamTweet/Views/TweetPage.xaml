@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             xmlns:controls="clr-namespace:XamTweet.Controls;assembly=XamTweet"
+             xmlns:circleImage="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin.Abstractions"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="XamTweet.Views.TweetPage"
+             Title="{Binding Title}">
+    <StackLayout Padding="10">
+        <Grid Padding="5">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="75" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <controls:ClickableView
+                    TappedCommand="{Binding TweetProfileTappedCommand}"
+                    CommandParameter="{Binding Tweet}"
+                    Grid.RowSpan="2">
+                <circleImage:CircleImage
+                    Aspect="AspectFill"
+                    Source="{Binding Tweet.User.Profile_image_url_https}"
+                    WidthRequest="75"
+                    HeightRequest="75" />
+            </controls:ClickableView>
+
+            <StackLayout
+                Orientation="Vertical"
+                Grid.Row="0"
+                Grid.Column="1"
+                Margin="10, 0, 0, 0">
+                <Label
+                    Text="{Binding Tweet.User.Name}"
+                    FontSize="18"
+                    TextColor="Black" />
+                <Label
+                    Text="{Binding Tweet.User.Screen_name}"
+                    TextColor="Gray" FontSize="16" />
+                <Label
+                    Text="{Binding Tweet.Created_at}"
+                    TextColor="Gray"
+                    FontSize="16" />
+            </StackLayout>
+
+            <Label
+                Text="{Binding Tweet.Text}"
+                Grid.Row="1"
+                Grid.ColumnSpan="2"
+                FontSize="14" />
+
+            <Grid
+                Grid.ColumnSpan="2"
+                Grid.Row="2">
+                <StackLayout HorizontalOptions="CenterAndExpand" Orientation="Horizontal">
+                    <Label Text="Retweets: " />
+                    <Label Text="{Binding Tweet.Retweet_count}" />
+                </StackLayout>
+                <StackLayout Grid.Column="1" HorizontalOptions="CenterAndExpand" Orientation="Horizontal">
+                    <Label Text="Favoritos: " />
+                    <Label Text="{Binding Tweet.Favorite_count}" />
+                </StackLayout>
+            </Grid>
+        </Grid>
+    </StackLayout>
+</ContentPage>

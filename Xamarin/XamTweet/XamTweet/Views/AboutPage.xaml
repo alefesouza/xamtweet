@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:XamTweet.Controls;assembly=XamTweet"
+             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="XamTweet.Views.AboutPage"
+             Title="Sobre">
+    <ScrollView>
+        <StackLayout Padding="16">
+            <Label Text="Aplicativo desenvolvido por" />
+            <controls:ClickableView TappedCommand="{Binding LinkCommand}" CommandParameter="AlefeSouza">
+                <Label Text="Alefe Souza" TextColor="Blue" />
+            </controls:ClickableView>
+            <Label Text="Esse aplicativo foi desenvolvido para o final da Maratona Xamarin Intermediária, utilizando boas-práticas e outros conhecimentos que adquiri durante o curso." />
+
+            <Label Text="Agradecimentos:" />
+            <Label Text="Aos instrutores da Maratona Xamarin Intermediária pelo ótimo compartilhamento de conhecimento:" />
+            <controls:ClickableView TappedCommand="{Binding LinkCommand}" CommandParameter="Angelo">
+                <Label Text="Angelo Belchior" TextColor="Blue" />
+            </controls:ClickableView>
+            <controls:ClickableView TappedCommand="{Binding LinkCommand}" CommandParameter="Alexandre">
+                <Label Text="Alexandre Chohfi" TextColor="Blue" />
+            </controls:ClickableView>
+            <controls:ClickableView TappedCommand="{Binding LinkCommand}" CommandParameter="Valerio">
+                <Label Text="Valério Ferreira" TextColor="Blue" />
+            </controls:ClickableView>
+            <controls:ClickableView TappedCommand="{Binding LinkCommand}" CommandParameter="WilliamB">
+                <Label Text="William Barbosa" TextColor="Blue" />
+            </controls:ClickableView>
+            <controls:ClickableView TappedCommand="{Binding LinkCommand}" CommandParameter="WilliamS">
+                <Label Text="William S. Rodriguez" TextColor="Blue" />
+            </controls:ClickableView>
+            
+            <Label Text="Bibliotecas utilizadas:" />
+            <controls:ClickableView TappedCommand="{Binding LinkCommand}" CommandParameter="Prism">
+                <Label Text="Prism" TextColor="Blue" />
+            </controls:ClickableView>
+            <controls:ClickableView TappedCommand="{Binding LinkCommand}" CommandParameter="ImageCircle">
+                <Label Text="Xam.Plugins.Forms.ImageCircle" TextColor="Blue" />
+            </controls:ClickableView>
+            <controls:ClickableView TappedCommand="{Binding LinkCommand}" CommandParameter="Settings">
+                <Label Text="Xam.Plugins.Settings" TextColor="Blue" />
+            </controls:ClickableView>
+            <controls:ClickableView TappedCommand="{Binding LinkCommand}" CommandParameter="Newtonsoft">
+                <Label Text="Newtonsoft.Json" TextColor="Blue" />
+            </controls:ClickableView>
+            <controls:ClickableView TappedCommand="{Binding LinkCommand}" CommandParameter="Azure">
+                <Label Text="Microsoft.Azure.Mobile.Client" TextColor="Blue" />
+            </controls:ClickableView>
+        </StackLayout>
+    </ScrollView>
+</ContentPage>

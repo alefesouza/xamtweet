@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="XamTweet.Views.LoginPage"
+             Title="Login">
+    <StackLayout VerticalOptions="Center" HorizontalOptions="Center" Padding="16">
+        <Label Text="Bem-vindo ao XamTweet! Faça login com sua conta do Twitter para continuar" FontSize="Large" Font="Bold,20" />
+        
+        <Button Text="Login com Twitter" Command="{Binding LoginCommand}" />
+    </StackLayout>
+</ContentPage>

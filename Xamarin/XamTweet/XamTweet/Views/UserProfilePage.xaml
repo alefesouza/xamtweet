@@ -1,0 +1,133 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             xmlns:controls="clr-namespace:XamTweet.Controls;assembly=XamTweet"
+             xmlns:converters="clr-namespace:XamTweet.Converters;assembly=XamTweet"
+             xmlns:circleImage="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin.Abstractions"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="XamTweet.Views.UserProfilePage"
+             Title="{Binding User.Name}">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:NegateBooleanConverter x:Key="negate" />
+            <Style x:Key="CoverEntry" TargetType="Label">
+                <Setter Property="TextColor" Value="White" />
+                <Setter Property="HorizontalOptions" Value="CenterAndExpand" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
+    <Grid>
+        <controls:AppListView
+            HasUnevenRows="True"
+            HorizontalOptions="FillAndExpand"
+            ItemsSource="{Binding Tweets}"
+            ItemTappedCommand="{Binding TweetTappedCommand}"
+            LoadMoreCommand="{Binding MoreTweetsCommand}">
+            <ListView.Header>
+                <StackLayout>
+                    <Grid HeightRequest="270">
+                        <Image
+                            Grid.RowSpan="2"
+                            Source="{Binding User.Profile_banner_url}"
+                            HorizontalOptions="FillAndExpand"
+                            VerticalOptions="FillAndExpand"
+                            Aspect="AspectFill" />
+
+                        <BoxView Grid.RowSpan="2" Color="Black" Opacity=".25" VerticalOptions="FillAndExpand" />
+
+                        <StackLayout Padding="0, 16, 0, 0">
+                            <circleImage:CircleImage Source="{Binding User.Profile_image_url_https}" WidthRequest="75" HeightRequest="75" />
+
+                            <Label Text="{Binding User.Name}" Font="Bold,20" FontSize="18" TextColor="White" HorizontalOptions="CenterAndExpand" />
+                            <Label Text="{Binding User.Screen_name}" TextColor="White" FontSize="16" HorizontalOptions="CenterAndExpand" />
+                        </StackLayout>
+
+                        <Grid Grid.Row="1" Padding="0, 32, 0, 0">
+                            <StackLayout>
+                                <Label Text="Tweets" Style="{StaticResource CoverEntry}" />
+                                <Label Text="{Binding User.Statuses_count}" Style="{StaticResource CoverEntry}" />
+                            </StackLayout>
+
+                            <StackLayout Grid.Column="1">
+                                <Label Text="Seguindo" Style="{StaticResource CoverEntry}" />
+                                <Label Text="{Binding User.Friends_count}" Style="{StaticResource CoverEntry}" />
+                            </StackLayout>
+
+                            <StackLayout Grid.Column="2">
+                                <Label Text="Seguidores" Style="{StaticResource CoverEntry}" />
+                                <Label Text="{Binding User.Followers_count}" Style="{StaticResource CoverEntry}" />
+                            </StackLayout>
+                        </Grid>
+                    </Grid>
+                </StackLayout>
+            </ListView.Header>
+
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout Padding="10">
+                            <Grid Padding="5">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="75" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+
+                                <StackLayout Grid.RowSpan="2">
+                                    <circleImage:CircleImage
+                                        Aspect="AspectFill"
+                                        Source="{Binding User.Profile_image_url_https}"
+                                        WidthRequest="75"
+                                        HeightRequest="75" />
+                                </StackLayout>
+
+                                <StackLayout
+                                    Orientation="Vertical"
+                                    Grid.Row="0"
+                                    Grid.Column="1"
+                                    Margin="10, 0, 0, 0">
+                                    <Label
+                                        Text="{Binding User.Name}"
+                                        FontSize="18"
+                                        TextColor="Black" />
+                                    <Label
+                                        Text="{Binding User.Screen_name}"
+                                        TextColor="Gray"
+                                        FontSize="16" />
+                                    <Label
+                                        Text="{Binding Created_at}"
+                                        TextColor="Gray"
+                                        FontSize="16" />
+                                </StackLayout>
+
+                                <Label
+                                    Text="{Binding Text}"
+                                    Grid.Row="1"
+                                    Grid.ColumnSpan="2"
+                                    FontSize="14" />
+                            </Grid>
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+            <ListView.Footer>
+                <Grid Margin="16">
+                    <ActivityIndicator
+                                        IsVisible="{Binding IsNoMoreTweets, Converter={StaticResource negate}}"
+                                        IsRunning="{Binding IsNoMoreTweets, Converter={StaticResource negate}}"
+                                        HorizontalOptions="CenterAndExpand" />
+                    <Label
+                                        HorizontalOptions="CenterAndExpand"
+                                        IsVisible="{Binding IsNoMoreTweets}"
+                                        Text="Não há mais tweets" />
+                </Grid>
+            </ListView.Footer>
+        </controls:AppListView>
+    </Grid>
+</ContentPage>
